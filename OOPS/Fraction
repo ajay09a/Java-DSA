@@ -1,0 +1,96 @@
+*****frac.java******
+
+
+
+package fractionpackage;
+
+public class frac {
+
+	private int num;
+	private int deno;
+	
+	public frac(int num, int deno) {
+		this.num = num;
+		this.deno = deno;
+		simplify();
+	}
+	private void simplify() {
+		int gcd = 1;
+		int smaller = Math.min(num, deno);
+		for(int i=2; i<=smaller; i++) {
+			if(num%i==0 && deno%i==0)
+				gcd = i;
+		}
+		num = num/gcd;
+		deno = deno/gcd;
+	}
+	public void increment() {
+		num = num+deno;
+		simplify();
+	}
+	public void add(frac f1) {
+		this.num = this.num *f1.deno + this.deno * f1.num;
+		this.deno = this.deno * f1.deno;
+		simplify();
+	}
+	public void sub(frac f1) {
+		this.num = this.num *f1.deno - this.deno * f1.num;
+		this.deno = this.deno * f1.deno;
+		simplify();
+	}
+	public void multi(frac f1) {
+		this.num = (this.num *f1.num);
+		this.deno = this.deno * f1.deno;
+		simplify();
+	}
+	public void div(frac f1) {
+		this.num = (this.num / f1.num);
+		this.deno = this.deno / f1.deno;
+		simplify();
+	}
+	public void print() {
+		System.out.println(this.num+"/"+this.deno);
+	}
+	
+}
+
+
+
+
+
+
+
+
+
+
+
+******fraction.java***********
+
+package fractionpackage;
+
+public class fraction {
+
+	public static void main(String[] args) {
+		
+		frac f = new frac(4,6);
+		f.print();
+		f.increment();
+		f.print();
+		
+		frac f1 = new frac(2,3);
+		
+		// to add fraction 1 in fraction
+		f.add(f1);
+		f.print();
+		// to sub fraction 1 from fraction
+		f.sub(f1);
+		f.print();
+		// to multiply fraction 1 to fraction
+		f.multi(f1);
+		f.print();
+		// to divide fraction 1 and fraction
+		f.div(f1);
+		f.print();
+	}
+
+}
