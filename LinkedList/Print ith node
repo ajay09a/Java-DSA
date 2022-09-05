@@ -1,0 +1,39 @@
+package fractionpackage;
+
+import java.util.ArrayList;
+
+public class fraction {
+	
+	public static void printIthNode(node<Integer> head, int i){
+		//Your code goes here
+        node<Integer> n=head;
+        
+        int m =0;
+        while(n != null){
+            if(m == i){
+                System.out.println(n.data);
+                break;
+            }
+            m++;
+            n = n.next;
+        }
+	}
+	
+	public static node<Integer> createList(){
+		node<Integer> n1 = new node<>(10);
+		node<Integer> n2 = new node<>(20);
+		node<Integer> n3 = new node<>(30);
+		node<Integer> n4 = new node<>(40);
+		n1.next = n2;
+		n2.next = n3;
+		n3.next = n4;
+		return n1;
+	}
+	public static void main(String[] args) {
+		
+		node<Integer> head = createList();
+		int i = 2;
+		printIthNode(head,i);
+	}
+
+}
