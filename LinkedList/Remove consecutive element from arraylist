@@ -1,0 +1,26 @@
+package arraylistpackage;
+
+import java.util.ArrayList;
+
+public class arrlist {
+	public static ArrayList<Integer> removeDuplicate(int a[]){
+		ArrayList<Integer> result = new ArrayList<>();
+		result.add(a[0]);
+		for(int i=1; i<a.length; i++) {
+			if(a[i]!=a[i-1])
+				result.add(a[i]);
+		}
+		return result;
+	}
+
+	public static void main(String[] args) {
+		
+		int a[] = {10,10,10,20,20,30,10,50,50};
+		ArrayList<Integer> arr = removeDuplicate(a);
+		for(int i:arr) {
+			System.out.print(i+",");
+		}
+		
+	}
+
+}
