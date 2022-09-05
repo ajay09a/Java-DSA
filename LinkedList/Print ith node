@@ -1,8 +1,31 @@
+*****node.java************
 package fractionpackage;
+
+public class node<T> {
+
+	T data;
+	node<T> next;
+	
+	node(T data){
+		this.data = data;
+//		next = null;
+	}
+	
+}
+
+
+
+
+
+
+
+******printNode.java**********
+
+package nodepackage;
 
 import java.util.ArrayList;
 
-public class fraction {
+public class printNode {
 	
 	public static void printIthNode(node<Integer> head, int i){
 		//Your code goes here
