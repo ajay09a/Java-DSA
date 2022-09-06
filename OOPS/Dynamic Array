@@ -1,0 +1,93 @@
+******node.java**********
+
+package fractionpackage;
+
+public class node {
+
+	private int data[];
+	private int num;
+	
+	public node() {
+		data = new int[5];
+	}
+	public void change() {
+		int arr[] = data;
+		data = new int[2*arr.length];
+		for(int i=0; i<arr.length;i++) {
+			data[i] = arr[i];
+		}
+	}
+	public void add(int n){
+		if(num>data.length) {
+			change();
+		}
+		for(int i=num; i<data.length;i++) {
+			data[i] = n;
+		}
+		num++;
+	}
+	public void print() {
+		for(int i=0; i<num;i++) {
+			System.out.print(data[i]+" ");
+		}
+		System.out.println();
+	}
+	public void get(int n) {
+		System.out.print(data[n]);
+	}
+	public void set(int n, int num) {
+		data[n] = num;
+	}
+	public void size() {
+		System.out.println(num);
+	}
+	public void removeLast() {
+		data[data.length-1] = 0;
+		num--;
+	}
+	public void adding(int n) {
+		data[num] = n;
+		num++;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+********* fraction.java***************
+
+package fractionpackage;
+
+
+public class fraction {
+
+	public static void main(String[] args) {
+		
+		node d = new node();
+//		for(int i=0; i<100;i++) {
+//			d.add(100+i);
+//		}
+		
+		
+//		d.removeLast();
+//		d.set(2, 10);
+		
+		d.adding(20);
+		d.adding(30);
+		d.adding(40);
+		d.adding(50);
+		
+		d.size();
+		d.print();
+		d.get(3);
+		
+	}
+
+}
