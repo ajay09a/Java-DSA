@@ -1,0 +1,57 @@
+package listpackage;
+
+public class Node<T> {
+	T data;
+	Node <T> next;
+	Node(T data){
+		this.data = data;
+	}
+}
+
+
+
+
+
+
+
+
+package listpackage;
+
+import java.util.Scanner;
+
+public class ListUse {
+	public static Node<Integer> takeInput(){
+		Scanner s = new Scanner(System.in);
+		int data = s.nextInt();
+		Node<Integer> head = null;
+		while(data!=-1) {
+			Node<Integer> current = new Node<>(data);
+			if(head == null) {
+				head = current;
+			}
+			else {
+				Node<Integer> tail = head;
+				while(tail.next!= null)
+					tail = tail.next;
+				tail.next = current;
+			}
+			data = s.nextInt();
+		}
+		return head;
+	}
+	public static void print(Node<Integer> head) {
+		while(head!=null) {
+			System.out.print(head.data + " ");
+			head = head.next;
+		}
+		System.out.println();
+	}
+
+	public static void main(String[] args) {
+		
+		Node<Integer> n1 = takeInput();
+		print(n1);
+
+	}
+
+}
