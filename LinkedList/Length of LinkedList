@@ -1,0 +1,15 @@
+For a given singly linked list of integers, find and return its length. Do it using an iterative method
+
+
+
+public static int length(LinkedListNode<Integer> head){
+		//Your code goes here
+        LinkedListNode<Integer> n=head;
+        int count=0;
+        while(n!=null)
+        {
+            count++;
+            n=n.next;
+        }
+        return count;
+	}
