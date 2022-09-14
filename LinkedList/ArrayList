@@ -15,13 +15,13 @@ public class ArrayUse {
 		System.out.println(arr.size());
 		System.out.println(arr.get(2));
 //		this will add insert at some position and that position element
-//		will swift to right and array size increase
+//		will shift to right and array size increase
 		arr.add(2,60);
 		System.out.println(arr.get(2));
 //		to replace the element with another element
 		arr.set(0, 5);
 		System.out.println(arr.get(0));
-//		to remove or delete any element from index and it will swift all element to left
+//		to remove or delete any element from index and it will shift all element to left
 		arr.remove(2);
 		System.out.println(arr.get(2));
 //		we can also remove a integer object if we need to remove a particular element
