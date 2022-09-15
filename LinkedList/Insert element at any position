@@ -48,39 +48,12 @@ public class PolynomialUse {
 		}
 	}
   
-  
-  // Another method to insert element
-  
-  
-  public static void insert(Node<Integer> head, int elem, int pos){
-    Node<Integer> nodeToBeInserted= new Node<Integer>(elem);
-
-    if(pos==0){
-      nodeToBeInserted.next= head;
-      head= nodeToBeInserted;
-    }else{
-        int count=0;
-        Node<Integer> prev= head;
-        while(count<pos-1 && prev!=null){
-          count++;
-          prev=prev.next;
-        }
-        if(prev!=null){
-            nodeToBeInserted.next= prev.next;
-            prev.next= nodeToBeInserted;
-        }
-    }
-  }
-
-  
-  
 
 	public static void main(String[] args) {
 		
 		Node<Integer> n1 = takeInput();
 		print(n1);
 		add(n1,60,0);
-    insert(n1,80,3);
 		print(n1);
 
 	}
