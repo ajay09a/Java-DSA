@@ -1,0 +1,88 @@
+package fractionpackage;
+
+import java.util.Scanner;
+
+public class PolynomialUse {
+	public static Node<Integer> takeInput(){
+		Scanner s = new Scanner(System.in);
+		int data = s.nextInt();
+		Node<Integer> head = null, tail = null;
+		while(data!=-1) {
+			Node<Integer> current = new Node<>(data);
+			if(head == null) {
+				head = current;
+				tail = current;
+			}
+			else {
+				tail.next = current;
+				tail = current;
+			}
+			data = s.nextInt();
+		}
+		return head;
+	}
+	public static void print(Node<Integer> head) {
+		while(head!=null) {
+			System.out.print(head.data + " ");
+			head = head.next;
+		}
+		System.out.println();
+	}
+	public static void add(Node<Integer> head,int n, int pos) {
+		Node<Integer> num = new Node<>(n);
+		for(int i=0; i<=pos;i++){
+			if(i==pos-1) {
+				num.next = head.next;
+				head.next = num;
+			}
+			if(pos == 0) {
+				int temp = head.data;
+				head.data = num.data;
+				Node<Integer> Duplicate = head.next;
+				
+				Node<Integer> adding = new Node<>(temp);
+				head.next = adding;
+				adding.next = Duplicate;
+			}
+			head = head.next;
+		}
+	}
+  
+  
+  // Another method to insert element
+  
+  
+  public static void insert(Node<Integer> head, int elem, int pos){
+    Node<Integer> nodeToBeInserted= new Node<Integer>(elem);
+
+    if(pos==0){
+      nodeToBeInserted.next= head;
+      head= nodeToBeInserted;
+    }else{
+        int count=0;
+        Node<Integer> prev= head;
+        while(count<pos-1 && prev!=null){
+          count++;
+          prev=prev.next;
+        }
+        if(prev!=null){
+            nodeToBeInserted.next= prev.next;
+            prev.next= nodeToBeInserted;
+        }
+    }
+  }
+
+  
+  
+
+	public static void main(String[] args) {
+		
+		Node<Integer> n1 = takeInput();
+		print(n1);
+		add(n1,60,0);
+    insert(n1,80,3);
+		print(n1);
+
+	}
+
+}
