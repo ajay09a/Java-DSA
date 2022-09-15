@@ -47,13 +47,34 @@ public class PolynomialUse {
 			head = head.next;
 		}
 	}
-  
+	public static Node<Integer> deleteNode(Node<Integer> head, int i) {
+		// Write your code here.
+        if(head==null )
+            return head;
+        if(i==0)
+            return head.next;
+        int count=0;
+        Node<Integer> temp=head;
+        while(temp!=null && count<i-1)
+        {
+            temp=temp.next;
+            count++;
+        }
+        if(temp==null)
+            return head;
+        if(temp.next!=null)
+            temp.next=temp.next.next;
+         
+        
+        return head;
+	}
 
 	public static void main(String[] args) {
 		
 		Node<Integer> n1 = takeInput();
 		print(n1);
-		add(n1,60,0);
+//		add(n1,60,0);
+		n1 = deleteNode(n1,0);
 		print(n1);
 
 	}
