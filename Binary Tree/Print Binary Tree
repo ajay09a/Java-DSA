@@ -1,0 +1,75 @@
+Printing this binary tree:
+               10
+              /  \
+            20    30
+            \      /
+            40    50
+**********************************
+**********************************
+
+
+
+package BinaryTreeProblem;
+
+public class BinaryTreeNode<T> {
+	public T data;
+	public BinaryTreeNode<T> left;
+	public BinaryTreeNode<T> right;
+	
+	BinaryTreeNode(T data){
+		this.data = data;
+	}
+
+}
+
+
+
+
+*************************************
+*************************************
+
+
+
+
+package BinaryTreeProblem;
+
+public class BinaryTreeUse {
+	public static void printTree(BinaryTreeNode<Integer> root) {
+		if(root == null)
+			return;
+		if(root.left == null && root.right == null) {
+			System.out.println(root.data+": ");
+		}
+		else if(root.left == null) {
+			System.out.println(root.data+": "+"R"+root.right.data);
+		}
+		else if(root.right == null) {
+			System.out.println(root.data+": "+"L"+root.left.data);
+		}
+		else {
+			System.out.println(root.data+": "+"L"+root.left.data+","+"R"+root.right.data);
+		}
+		printTree(root.left);
+		printTree(root.right);
+		
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		BinaryTreeNode<Integer> root = new BinaryTreeNode<>(10);
+		BinaryTreeNode<Integer> rootLeft = new BinaryTreeNode<>(20);
+		BinaryTreeNode<Integer> rootRight = new BinaryTreeNode<>(30);
+		root.left = rootLeft;
+		root.right = rootRight;
+		
+		BinaryTreeNode<Integer> lcl2 = new BinaryTreeNode<>(40);
+		BinaryTreeNode<Integer> rcr2 = new BinaryTreeNode<>(50);
+		rootLeft.right = rcr2;
+		rootRight.left = lcl2;
+		
+		printTree(root);
+		
+
+	}
+
+}
