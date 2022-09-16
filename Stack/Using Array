@@ -1,0 +1,118 @@
+package StackProblem;
+
+public class StackUsingArray {
+	private int data[];
+	private int topIndex;
+	
+	StackUsingArray(){
+		data = new int [10];
+		topIndex = -1;
+	}
+	
+	public void push(int num) throws StackFullException {
+		if(topIndex == data.length-1) {
+			throw new StackFullException();
+		}
+		data[++topIndex] = num;
+	}
+	public int pop() throws StackEmptyException {
+		if(topIndex<0) {
+			throw new StackEmptyException();
+		}
+		int num = data[topIndex];
+		topIndex--;
+		return num;
+	}
+	public int size() {
+		return topIndex+1;
+	}
+	public int top() throws StackEmptyException {
+		if(topIndex<0) {
+			throw new StackEmptyException();
+		}
+		int num = data[topIndex];
+		return num;
+	}
+	public boolean isEmpty() {
+		return topIndex == -1;
+	}
+
+}
+
+
+
+
+
+
+*********************************************************************************
+*********************************************************************************
+
+
+
+
+
+package StackProblem;
+
+public class StackUse {
+	
+	public static void main(String[] args) throws StackFullException, StackEmptyException {
+		
+		StackUsingArray stack = new StackUsingArray();
+		System.out.println(stack.isEmpty());
+		stack.push(10);
+		stack .push(20);
+		stack.push(30);
+		System.out.println(stack.size());
+		System.out.println(stack.pop());
+		System.out.println(stack.size());
+		System.out.println(stack.top());
+		System.out.println(stack.isEmpty());
+	}
+
+}
+
+
+
+
+
+
+
+*********************************************************************************
+*********************************************************************************
+
+
+
+
+
+package StackProblem;
+
+public class StackEmptyException extends Exception {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+}
+
+
+
+
+
+*********************************************************************************
+*********************************************************************************
+
+
+
+
+
+package StackProblem;
+
+public class StackFullException extends Exception {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+}
