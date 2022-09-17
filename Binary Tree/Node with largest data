@@ -1,0 +1,72 @@
+package BinaryTreeProblem;
+
+public class BinaryTreeNode<T> {
+	public T data;
+	public BinaryTreeNode<T> left;
+	public BinaryTreeNode<T> right;
+	
+	BinaryTreeNode(T data){
+		this.data = data;
+	}
+
+}
+
+
+
+***************************************
+***************************************
+
+
+
+
+
+
+package BinaryTreeProblem;
+
+import java.util.Scanner;
+
+public class BinaryTreeUse {
+	
+	public static BinaryTreeNode<Integer> takeInput(boolean isRoot, int parentNode, boolean isLeft) {
+		if(isRoot) {
+			System.out.println("Enter Root data");
+		}
+		else {
+			if(isLeft) {
+				System.out.println("Enter Left Child of "+parentNode);
+			}
+			else {
+				System.out.println("Enter Right Child of "+parentNode);
+			}
+		}
+		Scanner s = new Scanner(System.in);
+		int rootData = s.nextInt();
+		if(rootData == -1)
+			return null;
+		BinaryTreeNode<Integer> root = new BinaryTreeNode<>(rootData);
+		BinaryTreeNode<Integer> leftChild = takeInput(false, rootData, true);
+		BinaryTreeNode<Integer> rightChild = takeInput(false, rootData, false);
+		root.left = leftChild;
+		root.right = rightChild;
+		return root;
+	}
+	
+	public static int largestNode(BinaryTreeNode<Integer> root) {
+		if(root== null){
+            return -1;
+        }
+        int largestleft = largestNode(root.left);
+        int largestright = largestNode(root.right);
+        
+        return Math.max(root.data, Math.max(largestleft, largestright));
+		
+	}
+
+	public static void main(String[] args) {
+		BinaryTreeNode<Integer> root = takeInput(true,0,true);
+		System.out.println("Largest Nodes in the tree: "+largestNode(root));
+		
+
+	}
+
+}
