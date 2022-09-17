@@ -1,0 +1,73 @@
+package BinaryTreeProblem;
+
+public class BinaryTreeNode<T> {
+	public T data;
+	public BinaryTreeNode<T> left;
+	public BinaryTreeNode<T> right;
+	
+	BinaryTreeNode(T data){
+		this.data = data;
+	}
+
+}
+
+
+
+
+***************************************
+***************************************
+
+
+
+
+
+package BinaryTreeProblem;
+
+import java.util.Scanner;
+
+public class BinaryTreeUse {
+
+	public static BinaryTreeNode<Integer> takeInput(boolean isRoot, int parentNode, boolean isLeft) {
+		if(isRoot) {
+			System.out.println("Enter Root data");
+		}
+		else {
+			if(isLeft) {
+				System.out.println("Enter Left Child of "+parentNode);
+			}
+			else {
+				System.out.println("Enter Right Child of "+parentNode);
+			}
+		}
+		Scanner s = new Scanner(System.in);
+		int rootData = s.nextInt();
+		if(rootData == -1)
+			return null;
+		BinaryTreeNode<Integer> root = new BinaryTreeNode<>(rootData);
+		BinaryTreeNode<Integer> leftChild = takeInput(false, rootData, true);
+		BinaryTreeNode<Integer> rightChild = takeInput(false, rootData, false);
+		root.left = leftChild;
+		root.right = rightChild;
+		return root;
+	}
+  
+  public static int getSum(BinaryTreeNode<Integer> root) {
+		//Your code goes here.
+        if(root== null){
+            return 0;
+        }
+        int leftChild = 0;
+        int rightChild = 0;
+        leftChild+=getSum(root.left);
+        rightChild+=getSum(root.right);
+        return root.data+leftChild+rightChild;
+	}
+
+	public static void main(String[] args) {
+		BinaryTreeNode<Integer> root = takeInput(true,0,true);
+    System.out.println(getSum(root));
+		
+
+	}
+
+}
