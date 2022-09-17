@@ -1,0 +1,91 @@
+package BinaryTreeProblem;
+
+public class BinaryTreeNode<T> {
+	public T data;
+	public BinaryTreeNode<T> left;
+	public BinaryTreeNode<T> right;
+	
+	BinaryTreeNode(T data){
+		this.data = data;
+	}
+
+}
+
+
+
+*****************************
+*****************************
+
+
+
+
+package BinaryTreeProblem;
+
+import java.util.Scanner;
+
+public class BinaryTreeUse {
+	public static void printTree(BinaryTreeNode<Integer> root) {
+		if(root == null)
+			return;
+		if(root.left == null && root.right == null) {
+			System.out.println(root.data+": ");
+		}
+		else if(root.left == null) {
+			System.out.println(root.data+": "+"R"+root.right.data);
+		}
+		else if(root.right == null) {
+			System.out.println(root.data+": "+"L"+root.left.data);
+		}
+		else {
+			System.out.println(root.data+": "+"L"+root.left.data+","+"R"+root.right.data);
+		}
+		printTree(root.left);
+		printTree(root.right);
+		
+	}
+
+	
+	public static BinaryTreeNode<Integer> takeInput(boolean isRoot, int parentNode, boolean isLeft) {
+		if(isRoot) {
+			System.out.println("Enter Root data");
+		}
+		else {
+			if(isLeft) {
+				System.out.println("Enter Left Child of "+parentNode);
+			}
+			else {
+				System.out.println("Enter Right Child of "+parentNode);
+			}
+		}
+		Scanner s = new Scanner(System.in);
+		int rootData = s.nextInt();
+		if(rootData == -1)
+			return null;
+		BinaryTreeNode<Integer> root = new BinaryTreeNode<>(rootData);
+		BinaryTreeNode<Integer> leftChild = takeInput(false, rootData, true);
+		BinaryTreeNode<Integer> rightChild = takeInput(false, rootData, false);
+		root.left = leftChild;
+		root.right = rightChild;
+		return root;
+	}
+	
+	public static int numNode(BinaryTreeNode<Integer> root) {
+		if(root== null){
+            return 0;
+        }
+        int leftChild = numNode(root.left);
+        int rightChild = numNode(root.right);
+        
+        return 1+leftChild+rightChild;
+		
+	}
+
+	public static void main(String[] args) {
+		BinaryTreeNode<Integer> root = takeInput(true,0,true);
+		printTree(root);
+
+		System.out.println("Number of Nodes in the tree: "+numNode(root));
+
+	}
+
+}
