@@ -1,0 +1,86 @@
+package BinaryTreeProblem;
+
+public class BinaryTreeNode<T> {
+	public T data;
+	public BinaryTreeNode<T> left;
+	public BinaryTreeNode<T> right;
+	
+	BinaryTreeNode(T data){
+		this.data = data;
+	}
+
+}
+
+
+
+
+
+*******************************************
+*******************************************
+
+
+
+package BinaryTreeProblem;
+
+import java.util.Scanner;
+
+public class BinaryTreeUse {
+	
+	public static BinaryTreeNode<Integer> takeInput(boolean isRoot, int parentNode, boolean isLeft) {
+		if(isRoot) {
+			System.out.println("Enter Root data");
+		}
+		else {
+			if(isLeft) {
+				System.out.println("Enter Left Child of "+parentNode);
+			}
+			else {
+				System.out.println("Enter Right Child of "+parentNode);
+			}
+		}
+		Scanner s = new Scanner(System.in);
+		int rootData = s.nextInt();
+		if(rootData == -1)
+			return null;
+		BinaryTreeNode<Integer> root = new BinaryTreeNode<>(rootData);
+		BinaryTreeNode<Integer> leftChild = takeInput(false, rootData, true);
+		BinaryTreeNode<Integer> rightChild = takeInput(false, rootData, false);
+		root.left = leftChild;
+		root.right = rightChild;
+		return root;
+	}
+	
+	public static void depthAtK(BinaryTreeNode<Integer> root, int k) {
+		if(root== null){
+            return;
+        }
+		if(k ==1) {
+			System.out.println(root.data);
+			return;
+		}
+        depthAtK(root.left, k-1);
+        depthAtK(root.right, k-1);
+		
+	}
+    public static void changeToDepthTree(BinaryTreeNode<Integer> root, int depth)
+    {
+        if (root==null)
+        {
+            return;
+        }
+        root.data=depth;
+        changeToDepthTree(root.left,depth+1);
+        changeToDepthTree(root.right,depth+1);
+    }
+
+	public static void main(String[] args) {
+		BinaryTreeNode<Integer> root = takeInput(true,0,true);
+		System.out.println("Depth at K:");
+		depthAtK(root,2);
+		System.out.println("Replace node with depth:");
+		changeToDepthTree(root,0);
+		
+
+	}
+
+}
