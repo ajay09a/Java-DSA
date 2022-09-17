@@ -1,0 +1,66 @@
+package fractionpackage;
+
+public class Node<T> {
+	T data;
+	Node <T> next;
+	Node(T data){
+		this.data = data;
+	}
+}
+
+
+
+
+***********************************
+***********************************
+
+
+
+
+package fractionpackage;
+
+import java.util.Scanner;
+
+public class PolynomialUse {
+	public static Node<Integer> takeInput(){
+		Scanner s = new Scanner(System.in);
+		int data = s.nextInt();
+		Node<Integer> head = null, tail = null;
+		while(data!=-1) {
+			Node<Integer> current = new Node<>(data);
+			if(head == null) {
+				head = current;
+				tail = current;
+			}
+			else {
+				tail.next = current;
+				tail = current;
+			}
+			data = s.nextInt();
+		}
+		return head;
+	}
+	public static void print(Node<Integer> head) {
+		while(head!=null) {
+			System.out.print(head.data + " ");
+			head = head.next;
+		}
+		System.out.println();
+	}
+	public static void printReverse(Node<Integer> root) {
+		//Your code goes here
+        if (root==null)
+            return;
+        printReverse(root.next);
+        System.out.print(root.data+" ");
+	}
+	
+	public static void main(String[] args) {
+		
+		Node<Integer> n1 = takeInput();
+		print(n1);
+		printReverse(n1);
+
+	}
+
+}
