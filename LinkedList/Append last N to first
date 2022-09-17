@@ -1,0 +1,98 @@
+package fractionpackage;
+
+public class Node<T> {
+	T data;
+	Node <T> next;
+	Node(T data){
+		this.data = data;
+	}
+}
+
+
+
+
+************************************
+************************************
+
+
+
+
+
+
+
+package fractionpackage;
+
+import java.util.Scanner;
+
+public class PolynomialUse {
+	public static Node<Integer> takeInput(){
+		Scanner s = new Scanner(System.in);
+		int data = s.nextInt();
+		Node<Integer> head = null, tail = null;
+		while(data!=-1) {
+			Node<Integer> current = new Node<>(data);
+			if(head == null) {
+				head = current;
+				tail = current;
+			}
+			else {
+				tail.next = current;
+				tail = current;
+			}
+			data = s.nextInt();
+		}
+		return head;
+	}
+	public static void print(Node<Integer> head) {
+		while(head!=null) {
+			System.out.print(head.data + " ");
+			head = head.next;
+		}
+		System.out.println();
+	}
+	public static Node<Integer> appendLastNToFirst(Node<Integer> head, int n){
+		if(n==0)
+			return head;
+		int count=0;
+		Node<Integer> temp = head;
+		Node<Integer> temp2 = head;
+		while(temp!=null) {
+			temp = temp.next;
+			count++;
+		}
+		int num = count-n;
+		
+		temp = head;
+		count=0;
+		while(temp!=null) {
+			if(count==num) {
+				break;
+			}
+			temp = temp.next;
+			count++;
+		}
+		count=0;
+		while(count<num-1) {
+			head = head.next;
+			count++;
+		}
+		head.next = null;
+		head = temp;
+		count =0;
+		while(count<n-1) {
+			temp = temp.next;
+			count++;
+		}
+		temp.next = temp2;
+		return head;
+	}
+
+	public static void main(String[] args) {
+		
+		Node<Integer> n1 = takeInput();
+		n1 = appendLastNToFirst(n1,2);
+		print(n1);
+
+	}
+
+}
