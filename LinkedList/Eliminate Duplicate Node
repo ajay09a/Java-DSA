@@ -1,0 +1,18 @@
+public static LinkedListNode<Integer> removeDuplicates(LinkedListNode<Integer> head) {
+		//Your code goes here
+        if (head==null)
+        {
+            return head;
+        }
+        LinkedListNode<Integer> currentHead = head;
+            
+            while (currentHead.next!=null){
+                if (currentHead.data.equals(currentHead.next.data)){
+                    currentHead.next = currentHead.next.next;
+                }
+                else{
+                    currentHead=currentHead.next;
+                }
+            }
+        	return head; 
+	}
