@@ -1,0 +1,39 @@
+public static LinkedListNode<Integer> mergeTwoSortedLinkedLists(LinkedListNode<Integer> head1, LinkedListNode<Integer> head2) {
+        //Your code goes here
+        if(head1==null)
+            return head2;
+        if(head2==null)
+            return head1;
+        LinkedListNode<Integer> newNode = null, newTail = null;
+
+        if(head1.data < head2.data){
+            newNode = head1;
+            newTail = head1;
+            head1 = head1.next;
+        }
+        else{
+            newNode = head2;
+            newTail = head2;
+            head2 = head2.next;
+        }
+        while(head1!=null && head2!=null){  
+            if(head1.data < head2.data){
+                newTail.next = head1;
+                newTail = newTail.next;
+                head1 = head1.next;
+            }
+            else{
+                newTail.next = head2;
+                newTail = newTail.next;
+                head2 = head2.next;
+            }
+        }
+        if(head1!=null){
+            newTail.next = head1;
+        }
+        if(head2!=null){
+            newTail.next = head2;
+        }
+        
+        return newNode;
+    }
