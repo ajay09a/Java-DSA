@@ -1,0 +1,70 @@
+package fractionpackage;
+
+public class Node<T> {
+	T data;
+	Node <T> next;
+	Node(T data){
+		this.data = data;
+	}
+}
+
+
+*********************
+*********************
+
+
+
+package fractionpackage;
+
+import java.util.Scanner;
+
+public class PolynomialUse {
+	public static Node<Integer> takeInput(){
+		Scanner s = new Scanner(System.in);
+		int data = s.nextInt();
+		Node<Integer> head = null, tail = null;
+		while(data!=-1) {
+			Node<Integer> current = new Node<>(data);
+			if(head == null) {
+				head = current;
+				tail = current;
+			}
+			else {
+				tail.next = current;
+				tail = current;
+			}
+			data = s.nextInt();
+		}
+		return head;
+	}
+
+	public static void printRecursive(Node<Integer> head) {
+		if(head == null) {
+			return;
+		}
+		System.out.print(head.data+" ");
+		printRecursive(head.next);
+	}
+	public static Node<Integer> midPoint(Node<Integer> head){
+		if(head == null || head.next == null) {
+			return head;
+		}
+		Node<Integer> slow = head;
+		Node<Integer> fast = head.next;
+		while(fast!=null && fast.next!=null) {
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		
+		return slow;
+	}
+
+	
+	public static void main(String[] args) {
+		
+		Node<Integer> n1 = takeInput();
+		Node<Integer> mid = midPoint(n1);
+		System.out.println(mid.data);
+	}
+
+}
