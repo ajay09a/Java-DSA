@@ -1,0 +1,170 @@
+package fractionpackage;
+
+public class Node<T> {
+	T data;
+	Node <T> next;
+	Node(T data){
+		this.data = data;
+	}
+}
+
+
+
+******************************
+******************************
+
+
+
+
+package fractionpackage;
+
+import java.util.Scanner;
+
+class DoubleNode{
+
+    Node<Integer> head;
+    Node<Integer> tail;
+    DoubleNode(){
+
+    }
+
+    DoubleNode(Node<Integer> head, Node<Integer> tail){
+      this.head= head;
+      this.tail= tail;
+    }
+}
+
+
+public class PolynomialUse {
+	public static Node<Integer> takeInput(){
+		Scanner s = new Scanner(System.in);
+		int data = s.nextInt();
+		Node<Integer> head = null, tail = null;
+		while(data!=-1) {
+			Node<Integer> current = new Node<>(data);
+			if(head == null) {
+				head = current;
+				tail = current;
+			}
+			else {
+				tail.next = current;
+				tail = current;
+			}
+			data = s.nextInt();
+		}
+		return head;
+	}
+
+	public static void printRecursive(Node<Integer> head) {
+		if(head == null) {
+			return;
+		}
+		System.out.print(head.data+" ");
+		printRecursive(head.next);
+	}
+	
+	public static void printReverseWithRecursive(Node<Integer> head) {
+		if(head == null) {
+			return;
+		}
+		printReverseWithRecursive(head.next);
+		System.out.print(head.data+" ");
+	}
+	public static Node<Integer> insertRecursive(Node<Integer> head, int elem, int pos) {
+		//using pos>0 only if we want to add element in the last position
+		if(head == null && pos>0) {
+			return head;
+		}
+		if(pos==0) {
+			Node<Integer> node = new Node<Integer>(elem);
+			node.next = head;
+			return node;
+		}
+		else {
+			head.next = insertRecursive(head.next, elem,pos-1);
+			return head;
+		}
+	}
+	public static Node<Integer> deleteRecursive(Node<Integer> head, int pos) {
+		//using pos>0 only if we want to add element in the last position
+		if(head == null && pos>=0) {
+			return head;
+		}
+		if(pos==0) {
+			head = head.next;
+			return head;
+		}
+		else {
+			head.next = deleteRecursive(head.next, pos-1);
+			return head;
+		}
+	}
+	public static Node<Integer> reverseRecursive(Node<Integer> head){
+		if(head == null || head.next == null) {
+			return head;
+		}
+		Node<Integer> smallHead = reverseRecursive(head.next);
+		Node<Integer> tail = smallHead;
+		while(tail.next!=null) {
+			tail = tail.next;
+		}
+		tail.next = head;
+		head.next = null;
+		
+		return smallHead;
+	}
+
+	public static DoubleNode reverseRBetter(Node<Integer> head){
+	    DoubleNode ans;
+	    if(head==null || head.next ==null){
+	        ans= new DoubleNode(head, head);
+	        //ans.head= head;
+	        //ans.tail= head;
+	        return ans;
+	    }
+
+	    DoubleNode smallAns= reverseRBetter(head.next);
+	    smallAns.tail.next= head;
+	    head.next= null;
+	    ans = new DoubleNode();
+	    ans.head= smallAns.head;
+	    ans.tail= head;
+	    return ans;
+	}
+	  public static Node<Integer> reverseRBest(Node<Integer> head){
+	    if(head==null || head.next==null){
+	        return head;
+	    }
+	    Node<Integer> smallHead= reverseRBest(head.next);
+	    Node<Integer> reversedTail= head.next;
+	    reversedTail.next= head;
+	    head.next= null;
+	    return smallHead;
+	}
+	
+	public static void main(String[] args) {
+		
+		Node<Integer> n1 = takeInput();
+//		printRecursive(n1);
+//		System.out.println();
+//		printReverseWithRecursive(n1);
+//		System.out.println();
+//		n1 = insertRecursive(n1,60,2);
+//		printRecursive(n1);
+//		n1 = deleteRecursive(n1,0);
+//		printRecursive(n1);
+		
+		
+		
+//		3 approach to reverse the linked list and last one is better because it gives 
+//		O(n) and first give O(n^2) and second is good but not that better of 3rd
+		
+//		printRecursive(reverseRecursive(n1));
+		
+//		DoubleNode ans = reverseRBetter(n1);
+//		printRecursive(ans.head);
+		
+//		printRecursive(reverseRBest(n1));
+	}
+
+}
