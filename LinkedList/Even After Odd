@@ -1,0 +1,131 @@
+For a given singly linked list of integers, arrange the elements such that all the even numbers are placed after the odd numbers. The relative order of the odd and even terms should remain unchanged.
+
+Sample Input 1 :
+1 4 5 2 -1
+Sample Output 1 :
+1 5 4 2 
+Sample Input 2 :
+1 11 3 6 8 0 9 -1
+10 20 30 40 -1
+Sample Output 2 :
+1 11 3 9 6 8 0
+10 20 30 40
+
+
+
+
+
+package fractionpackage;
+
+public class Node<T> {
+	T data;
+	Node <T> next;
+	Node(T data){
+		this.data = data;
+	}
+}
+
+
+
+*******************************
+*******************************
+
+
+
+
+package fractionpackage;
+
+import java.util.Scanner;
+
+public class PolynomialUse {
+	public static Node<Integer> takeInput(){
+		Scanner s = new Scanner(System.in);
+		int data = s.nextInt();
+		Node<Integer> head = null, tail = null;
+		while(data!=-1) {
+			Node<Integer> current = new Node<>(data);
+			if(head == null) {
+				head = current;
+				tail = current;
+			}
+			else {
+				tail.next = current;
+				tail = current;
+			}
+			data = s.nextInt();
+		}
+		return head;
+	}
+
+	public static void printRecursive(Node<Integer> head) {
+		if(head == null) {
+			return;
+		}
+		System.out.print(head.data+" ");
+		printRecursive(head.next);
+	}
+	public static Node<Integer> midPoint(Node<Integer> head){
+		if(head == null || head.next == null) {
+			return head;
+		}
+		Node<Integer> slow = head;
+		Node<Integer> fast = head.next;
+		while(fast!=null && fast.next!=null) {
+			slow = slow.next;
+			fast = fast.next.next;
+		}
+		
+		return slow;
+	}
+	public static Node<Integer> evenAfterOdd(Node<Integer> head){
+		if(head==null || head.next==null) {
+			return head;
+		}
+		Node<Integer> node = head, neweven = null, newodd = null, even = null, odd = null;
+		
+		while(node!=null) {
+			if(node.data%2==0) {
+				if(neweven==null) {
+					neweven = node;
+					even = node;
+					node = node.next;
+				}
+				else {
+					neweven.next = node;
+					neweven = neweven.next;
+					node = node.next;
+				}
+			}
+			else {
+				if(newodd==null) {
+					newodd = node;
+					odd = node;
+					node = node.next;
+				}
+				else {
+					newodd.next = node;
+					newodd = newodd.next;
+					node = node.next;
+				}
+			}
+		}
+		if(neweven!=null)
+            neweven.next = null;
+		if(newodd!=null)
+            newodd.next = even;
+        else{
+            odd = even;
+        }
+		return odd;
+	}
+
+
+	
+	public static void main(String[] args) {
+		
+		Node<Integer> n1 = takeInput();
+		n1 = evenAfterOdd(n1);
+		printRecursive(n1);
+	}
+
+}
