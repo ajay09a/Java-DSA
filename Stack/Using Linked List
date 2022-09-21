@@ -1,0 +1,81 @@
+package StackProblem;
+
+public class StackUsingLinkedList<T> {
+	private T data;
+	private StackUsingLinkedList<T> next;
+	private int topIndex;
+	private StackUsingLinkedList<Integer> head;
+	
+	StackUsingLinkedList(T data){
+		this.data = data;
+		topIndex = 0;
+	}
+	
+	
+	public void push(T num) {
+		StackUsingLinkedList<Integer> newnode = new StackUsingLinkedList(num);
+		newnode.next = head;
+		head = newnode;
+		topIndex++;
+	}
+	public int pop() throws StackEmptyException {
+		if(head==null) {
+			throw new StackEmptyException();
+		}
+		Integer temp = head.data;
+		head = head.next;
+		topIndex--;
+		return temp;
+		
+	}
+	public int size() {
+		return topIndex;
+		
+	}
+	public int top() throws StackEmptyException {
+		if(head==null) {
+			throw new StackEmptyException();
+		}
+		return head.data;
+	}
+	public boolean isEmpty() {
+		return topIndex==0;
+		
+	}
+
+}
+
+
+
+
+
+
+***********************************************
+***********************************************
+
+
+
+
+
+
+package StackProblem;
+
+public class StackUse {
+	
+	public static void main(String[] args) throws StackFullException, StackEmptyException {
+		
+		
+		StackUsingLinkedList<Integer> stack = new StackUsingLinkedList<Integer>(10);
+		System.out.println(stack.isEmpty());
+		stack.push(20);
+		System.out.println(stack.size());
+		System.out.println(stack.top());
+		System.out.println(stack.isEmpty());
+		stack.push(30);
+		stack.push(40);
+		System.out.println(stack.size());
+		System.out.println(stack.top());
+		System.out.println(stack.pop());
+	}
+
+}
