@@ -1,0 +1,49 @@
+You have been given two stacks that can store integers as the data. Out of the two given stacks, one is populated and the other one is empty. You are required to write a function that reverses the populated stack using the one which is empty.
+
+Sample Input 1:
+1 2 3 4 5 10
+Note:
+Here, 10 is at the top of the stack.
+Sample Output 1:
+1 2 3 4 5 10
+Note:
+Here, 1 is at the top of the stack.
+Sample Input 2:
+2 8 15 1 10
+Sample Output 2:
+2 8 15 1 10
+
+
+
+**********************************
+**********************************
+
+
+
+
+import java.util.Stack;
+import java.util.*;
+public class Solution {
+
+	public static void reverseStack(Stack<Integer> input, Stack<Integer> extra) {
+		//Your code goes here
+        if (input.size()<=1)
+        {
+            return;
+        }
+        
+        int top=input.pop();
+        reverseStack(input,extra);
+        
+        while(!input.isEmpty())
+        {
+            extra.push(input.pop());
+        }
+        input.push(top);
+        
+        while(!extra.isEmpty())
+        {
+            input.push(extra.pop());
+        }
+	}
+}
