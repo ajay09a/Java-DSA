@@ -1,0 +1,167 @@
+           10
+         /    \
+       20      30                       == Tree is Balanced
+         \     /  \
+         50   60   70
+    
+
+           10
+         /    \
+       20      30                       == Tree is not Balanced
+                 \
+                  70
+                    \
+                     80
+                     
+if difference between left and right side of binary tree is less than or equal to 1 than tree is balanced otherwise not.
+   
+   
+   
+   
+********************************************
+********************************************
+
+
+
+
+
+
+package BinaryTreeProblem;
+
+public class BinaryTreeNode<T> {
+	public T data;
+	public BinaryTreeNode<T> left;
+	public BinaryTreeNode<T> right;
+	
+	BinaryTreeNode(T data){
+		this.data = data;
+	}
+
+}
+
+
+
+**********************************
+**********************************
+
+
+
+package BinaryTreeProblem;
+
+public class BinaryTreeReturn {
+	int height;
+	boolean isBal;
+	
+}
+
+
+
+
+*********************************
+*********************************
+
+
+
+
+package BinaryTreeProblem;
+
+import java.util.Scanner;
+
+public class BinaryTreeUse {
+	
+	public static BinaryTreeNode<Integer> takeInput(boolean isRoot, int parentNode, boolean isLeft) {
+		if(isRoot) {
+			System.out.println("Enter Root data");
+		}
+		else {
+			if(isLeft) {
+				System.out.println("Enter Left Child of "+parentNode);
+			}
+			else {
+				System.out.println("Enter Right Child of "+parentNode);
+			}
+		}
+		Scanner s = new Scanner(System.in);
+		int rootData = s.nextInt();
+		if(rootData == -1)
+			return null;
+		BinaryTreeNode<Integer> root = new BinaryTreeNode<>(rootData);
+		BinaryTreeNode<Integer> leftChild = takeInput(false, rootData, true);
+		BinaryTreeNode<Integer> rightChild = takeInput(false, rootData, false);
+		root.left = leftChild;
+		root.right = rightChild;
+		return root;
+	}
+	
+	public static void printTree(BinaryTreeNode<Integer> root) {
+		if(root == null)
+			return;
+		if(root.left == null && root.right == null) {
+			System.out.println(root.data+": ");
+		}
+		else if(root.left == null) {
+			System.out.println(root.data+": "+"R"+root.right.data);
+		}
+		else if(root.right == null) {
+			System.out.println(root.data+": "+"L"+root.left.data);
+		}
+		else {
+			System.out.println(root.data+": "+"L"+root.left.data+","+"R"+root.right.data);
+		}
+		printTree(root.left);
+		printTree(root.right);
+		
+	}
+	
+	public static int height(BinaryTreeNode<Integer> root) {
+		if(root==null)
+			return 0;
+		int leftHeight = height(root.left);
+		int rightHeight = height(root.right);
+		return 1+Math.max(leftHeight, rightHeight);
+	}
+	//time complexity is O(n^2)
+	public static boolean isBalanced (BinaryTreeNode<Integer> root) {
+		if(root == null)
+			return true;
+		int leftHeight = height(root.left);
+		int rightHeight = height(root.right);
+		if(Math.abs(leftHeight-rightHeight)>1)
+			return false;
+		boolean isLeftBalanced = isBalanced(root.left);
+		boolean isRightBalanced = isBalanced(root.right);
+		return isLeftBalanced && isRightBalanced;
+	}
+	
+	//time complexity is O(n)
+	public static BinaryTreeReturn isBalancedBetter(BinaryTreeNode<Integer> root) {
+		if(root==null) {
+			int height = 0;
+			boolean isBal = true;
+			BinaryTreeReturn ans = new BinaryTreeReturn();
+			ans.height = height;
+			ans.isBal = isBal;
+			return ans;
+		}
+		BinaryTreeReturn leftBalanced = isBalancedBetter(root.left);
+		BinaryTreeReturn rightBalanced = isBalancedBetter(root.right);
+		boolean isBal = true;
+		int height = 1 + Math.max(leftBalanced.height, rightBalanced.height);
+		
+		if(Math.abs(leftBalanced.height - rightBalanced.height)>1)
+			isBal = false;
+		if(!leftBalanced.isBal || !rightBalanced.isBal)
+			isBal = false;
+		BinaryTreeReturn ans = new BinaryTreeReturn();
+		ans.height = height;
+		ans.isBal = isBal;
+		return ans;
+	}
+	
+	public static void main(String[] args) {
+		BinaryTreeNode<Integer> root = takeInput(true,0,true);
+		System.out.println("is binary tree balanced: "+ isBalanced(root));
+		System.out.println("is binary tree balanced better: "+ isBalancedBetter(root).isBal);
+	}
+
+}
