@@ -1,0 +1,190 @@
+package BinaryTreeProblem;
+
+public class BinaryTreeNode<T> {
+	public T data;
+	public BinaryTreeNode<T> left;
+	public BinaryTreeNode<T> right;
+	
+	BinaryTreeNode(T data){
+		this.data = data;
+	}
+
+}
+
+
+
+
+**********************************
+**********************************
+
+
+
+
+package BinaryTreeProblem;
+public class IsBSTReturn{
+    int min;
+    int max;
+    boolean isBST;
+
+    public IsBSTReturn(int min, int max, boolean isBST){
+        this.min= min;
+        this.max= max;
+        this.isBST= isBST;
+    }
+}
+
+
+
+
+
+*************************************
+*************************************
+
+
+
+
+package BinaryTreeProblem;
+
+import java.util.*;
+
+public class BinaryTreeUse {
+	
+	public static BinaryTreeNode<Integer> takeInputBetter(){
+		Scanner s = new Scanner(System.in);
+		System.out.println("Enter root data:");
+		int rootData = s.nextInt();
+		
+		if(rootData==-1) {
+			return null;
+		}
+		
+		BinaryTreeNode<Integer> root = new BinaryTreeNode<>(rootData);
+		Queue<BinaryTreeNode<Integer>> pendingChild = new LinkedList<>();
+		pendingChild.add(root);
+		
+		while(!pendingChild.isEmpty()) {
+			BinaryTreeNode<Integer> front = pendingChild.poll();
+			System.out.println("Enter left child of "+ front.data);
+			int leftData = s.nextInt();
+			if(leftData!=-1) {
+				BinaryTreeNode<Integer> leftChild = new BinaryTreeNode<>(leftData);
+				front.left = leftChild;
+				pendingChild.add(leftChild);
+			}
+			System.out.println("Enter right child of "+ front.data);
+			int rightData = s.nextInt();
+			if(rightData!=-1) {
+				BinaryTreeNode<Integer> rightChild = new BinaryTreeNode<>(rightData);
+				front.right = rightChild;
+				pendingChild.add(rightChild);
+			}
+		}
+		return root;
+	}
+	
+	public static void printLevelWise(BinaryTreeNode<Integer> root) {
+		if(root == null)
+			return;
+		Queue<BinaryTreeNode<Integer>> pendingChild = new LinkedList<>();
+		pendingChild.add(root);
+		
+		while(!pendingChild.isEmpty()) {
+			BinaryTreeNode<Integer> front = pendingChild.poll();
+			System.out.print(front.data+": ");
+			if(front.left!=null) {
+				pendingChild.add(front.left);
+				System.out.print("L:"+front.left.data);
+			}
+			else {
+				System.out.print("L:-1");
+			}
+			if(front.right!=null) {
+				pendingChild.add(front.right);
+				System.out.print(", R:"+front.right.data);
+			}
+			else {
+				System.out.print(", R:-1");
+			}
+			System.out.println();
+		}
+	}
+
+	public static int maximum(BinaryTreeNode<Integer> root) {
+		if(root==null)
+			return Integer.MIN_VALUE;
+		int leftMax = maximum(root.left);
+		int rightMax = maximum(root.right);
+		
+		return Math.max(root.data, Math.max(leftMax, rightMax));
+	}
+	public static int minimum(BinaryTreeNode<Integer> root) {
+		if(root==null)
+			return Integer.MAX_VALUE;
+		int leftMin = minimum(root.left);
+		int rightMin = minimum(root.right);
+		
+		return Math.min(root.data, Math.min(leftMin, rightMin));
+	}
+	public static boolean isBST(BinaryTreeNode<Integer> root) {
+		if(root==null)
+			return true;
+		int maxLeft = maximum(root.left);
+		if(maxLeft>=root.data) {
+			return false;
+		}
+		int minRight = minimum(root.right);
+		if(minRight<root.data) {
+			return false;
+		}
+		
+		boolean isLeftBST = isBST(root.left);
+		boolean isRightBST = isBST(root.right);
+		return isLeftBST && isRightBST;
+	}
+	
+	//second approach
+	public static IsBSTReturn isBST2(BinaryTreeNode<Integer> root){
+        if(root==null){
+            IsBSTReturn ans = new IsBSTReturn(Integer.MAX_VALUE, Integer.MIN_VALUE, true);
+            return ans;
+        }
+        IsBSTReturn leftAns= isBST2(root.left);
+        IsBSTReturn rightAns= isBST2(root.right);
+
+        int min= Math.min(root.data, Math.min(leftAns.min, rightAns.min));
+        int max= Math.max(root.data, Math.min(leftAns.max, rightAns.max));
+        boolean isBST= true;
+        if(leftAns.max>=root.data){
+            isBST= false;
+        }
+        if(rightAns.min<root.data){
+            isBST= false;
+        }
+        if(!leftAns.isBST){
+            isBST= false;
+        }
+        if(rightAns.isBST){
+            isBST= false;
+        }
+        IsBSTReturn ans = new IsBSTReturn(min,max,isBST);
+        return ans;
+	}
+	
+	//third approach
+	public static boolean isBST3(BinaryTreeNode<Integer> root, int minRange, int maxRange) {
+		if(root==null)
+			return true;
+		if(root.data<minRange || root.data>maxRange) {
+			return false;
+		}
+		boolean isLeftWithRange = isBST3(root.left,minRange, root.data -1);
+		boolean isRightWithRange = isBST3(root.right, root.data, maxRange);
+		return isLeftWithRange && isRightWithRange;
+	}
+	
+	public static void main(String[] args) {
+		BinaryTreeNode<Integer> root = takeInputBetter();
+		System.out.println(isBST(root));
+	}
+
+}
