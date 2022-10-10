@@ -1,0 +1,25 @@
+For a given Binary Tree of integers, find and return the height of the tree.
+Example:
+                        10
+                      /      \
+                    20      30
+                   /    \
+                 40    50
+
+Height of the given tree is 3. 
+
+Height is defined as the total number of nodes along the longest path from the root to any of the leaf node.
+
+
+
+
+
+public static int height(BinaryTreeNode<Integer> root) {
+		//Your code goes here
+        if(root==null)
+            return 0;
+        int left = height(root.left);
+        int right = height(root.right);
+        
+        return 1 + Math.max(left, right);
+	}
