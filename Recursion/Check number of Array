@@ -1,0 +1,32 @@
+Given an array of length N and an integer x, you need to find if x is present in the array or not. Return true or false.
+Sample Input 1 :
+3
+9 8 10
+8
+Sample Output 1 :
+true
+Sample Input 2 :
+3
+9 8 10
+2
+Sample Output 2 :
+false
+
+
+
+
+
+
+
+
+public static boolean checkNumber(int input[], int x) {
+        return checkhelper(input,0,x);
+		
+	}
+    public static boolean checkhelper(int[] input, int start, int x){
+        if(input.length==start)
+            return false;
+        if(input[start]==x)
+            return true;
+        return checkhelper(input,start+1,x);
+    }
