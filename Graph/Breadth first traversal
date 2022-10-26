@@ -1,0 +1,52 @@
+import java.util.LinkedList;
+import java.util.Queue;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Solution {
+    //A print helper function to solve the print function issues
+    public static void printHelper(int edges[][], int sv,boolean visited[]){ //here sv is the vertex passed to the print function
+        Queue<Integer> q = new LinkedList<>();
+        q.add(sv);
+        visited[sv]=true;
+        while(q.size()!=0){
+            int firstelem = q.poll(); //here both poll and remove can be used, both remove and return the first element of the queue
+            System.out.print(firstelem+" ");
+            for(int i=0; i<edges.length; i++){
+                if(edges[firstelem][i]==1 && !visited[i]){ //check for all neighbours of firstElement if they have an edge and are not visited put them in the queue
+                    q.add(i);
+                    visited[i]=true;
+                }       
+            }
+        }   
+    }
+    // we have to deal with both connected and non connected
+    public static void print(int edges[][]){
+        boolean visited[] = new boolean[edges.length]; //here edges.length is the number of vertices
+        //here we loop through all the vertices if they are not visitied call the print helper function on it, to solve the problem of unconnected graphs
+        for(int i=0; i< edges.length; i++){
+            if(!visited[i]){
+                printHelper(edges, i, visited);   
+            }
+        }
+    }
+
+
+    public static void main(String[] args) throws NumberFormatException, IOException {
+        Scanner s = new Scanner(System.in);
+        int V = s.nextInt(); //here V stands for vertices
+        int E = s.nextInt(); //here E stands for edges
+        int edges[][] = new int[V][V]; //creates an adjaceny matrix for all vertices
+        //taking input, loop from 0 to e-1, that is e times and get the starting and ending vertex
+        for(int i =0; i< E; i++){
+            int fv = s.nextInt(); //this takes first vertex of the edge
+            int sv = s.nextInt(); //this takes second vertex of the edge
+            edges[fv][sv] = 1;   
+            edges[sv][fv] =1;
+        }
+        print(edges); //call print edges function
+    }
+
+}
