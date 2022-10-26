@@ -1,0 +1,46 @@
+package graphProblem;
+import java.util.*;
+public class Graphs {
+	
+	public static void dft(int adjec[][], int currentVertex, boolean visited[]) {
+		visited[currentVertex] = true;
+		System.out.print(currentVertex+" ");
+		for(int i = 0; i<adjec.length; i++) {
+			if(adjec[currentVertex][i] == 1 && visited[i] == false) {
+				dft(adjec, i, visited);
+			}
+		}
+	}
+	
+	public static void dft(int adjec[][]) {
+		boolean visited [] = new boolean [adjec.length];
+		dft(adjec, 0, visited);
+	}
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Scanner sc = new Scanner(System.in);
+		int v = sc.nextInt(); // v denotes no. of vertex;
+		int e = sc.nextInt(); // e denotes no. of edges.
+		int adjec [][] = new int[v][v];
+		
+		for(int i=0; i<e; i++) {
+//			Here we only change position of matrix from 0 to 1 whose we have edges
+			int v1 = sc.nextInt();
+			int v2 = sc.nextInt();
+			adjec[v1][v2] = 1;
+			adjec[v2][v1] = 1;
+		}
+		
+//		To check what we write until
+		for(int i=0; i<v; i++) {
+			for(int j=0; j<v; j++) {
+				System.out.print(adjec[i][j]+" ");
+			}
+			System.out.println();
+		}
+		
+		dft(adjec);
+	}
+
+}
