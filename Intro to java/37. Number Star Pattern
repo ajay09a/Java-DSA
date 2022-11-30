@@ -1,0 +1,50 @@
+Print the following pattern for given number of rows.
+Input format :
+
+Line 1 : N (Total number of rows)
+
+Sample Input :
+   5
+Sample Output :
+1234554321
+1234**4321
+123****321
+12******21
+1********1
+
+
+
+
+
+
+
+
+
+import java.util.Scanner;
+public class Solution {
+
+	public static void main(String[] args) {
+
+		// Write your code here	
+        Scanner s = new Scanner(System.in);
+			int n = s.nextInt();
+			
+			//for outer loop
+			for(int i=1; i<=n; i++) {
+				//inner increasing number
+				for(int j=1; j<=n-i+1; j++) {
+					System.out.print(j);
+				}
+				//inner star number
+				for(int j=1; j<=2*i-2; j++) {
+					System.out.print("*");
+				}
+				//inner decreasing number
+				for(int j=n-i+1; j>=1; j--) {
+					System.out.print(j);
+				}
+				System.out.println();
+			}
+
+	}
+}
