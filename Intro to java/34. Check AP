@@ -1,0 +1,58 @@
+Given input consists of n numbers. Check whether those n numbers form an arithmetic progression or not. Print true or false.
+Input format :
+Line 1 : n
+Line 2 : n numbers
+Sample Input 1 :
+6
+2 6 10 14 18 22
+Sample Output 1 :
+true
+Sample Input 2 :
+6
+2 6 10 15 19 23
+Sample Output 2 :
+false
+
+
+
+
+
+
+import java.util.Scanner;
+import java.util.Arrays;
+public class Main {
+    static boolean checkIsAP(int array[], int n) 
+    { 
+        if (n == 1) 
+            return true; 
+          
+        Arrays.sort(array); 
+          
+        int d = array[1] - array[0]; 
+        for (int i = 2; i < n; i++) 
+            if (array[i] - array[i-1] != d) 
+                return false; 
+          
+        return true; 
+    } 
+      
+	
+	public static void main(String[] args) {
+        Scanner s = new Scanner(System.in);
+		int num=s.nextInt();  
+		int[] array = new int[num];  
+		 
+		for(int i=0; i<num; i++)  
+		{   
+		array[i]=s.nextInt();  
+		}  
+		 
+        int n = array.length; 
+      
+        if(checkIsAP(array, n)) 
+            System.out.println("true"); 
+        else
+            System.out.println("false");
+
+	}
+}
