@@ -1,0 +1,51 @@
+public static String newN(int num) {
+		if(num==2) {
+			return "abc";
+		}
+		else if(num==3) {
+			return "def";
+		}
+		else if(num==4) {
+			return "ghi";
+		}
+		else if(num==5) {
+			return "jkl";
+		}
+		else if(num==6) {
+			return "mno";
+		}
+		else if(num==7) {
+			return "pqrs";
+		}
+		else if(num==8) {
+			return "tuv";
+		}
+		else if(num==9) {
+			return "wxyz";
+		}
+		else {
+			return "";
+		}
+	}
+	
+	public static void keypad(int num, String soFar) {
+		if(num==0 || num==1) {
+			System.out.println(soFar);
+			return;
+		}
+		int n = num%10;
+		String helpans = newN(n);
+		keypad(num/10, helpans.charAt(0)+soFar);
+		keypad(num/10, helpans.charAt(1)+soFar);
+		keypad(num/10, helpans.charAt(2)+soFar);
+		if(helpans.length()==4) {
+			keypad(num/10, helpans.charAt(3)+soFar);
+		}
+	}
+	
+	public static void main(String[] args) {  
+
+		Scanner s = new Scanner(System.in);
+		int num = s.nextInt();
+		keypad(num, "");
+	}
