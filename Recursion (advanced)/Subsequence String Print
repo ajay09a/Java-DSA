@@ -1,0 +1,17 @@
+public static void printSubsequences(String input, String stringSoFar ) {
+		if(input.length()==0) {
+			System.out.println(stringSoFar);
+			return;
+		}
+		String smallOutput = input.substring(1);
+		printSubsequences(smallOutput, stringSoFar);
+		printSubsequences(smallOutput, stringSoFar + input.charAt(0));
+	}
+	
+	public static void main(String[] args) {  
+
+		Scanner s = new Scanner(System.in);
+		String str = s.next();
+		printSubsequences(str, "");
+		
+	}
