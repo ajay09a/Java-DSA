@@ -1,0 +1,15 @@
+public static void factorial(int input, int answer ) {
+		if(input==0) {
+			System.out.println(answer);
+			return;
+		}
+		answer = answer * input;
+		factorial(input-1, answer);
+	}
+	
+	public static void main(String[] args) {  
+
+		Scanner s = new Scanner(System.in);
+		int n = s.nextInt();
+		factorial(n, 1);
+	}
